@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="hibernate" name="Hibernate">
+      <configuration>
+        <datasource-map>
+          <unit-entry name="com:hiber:dbclasses:hibernate.xml" value="1eb9a523-cb93-4951-bdad-d8dd2e4d773d" />
+          <unit-entry name="com:hiber:hibernate.xml" value="fab70111-e0e5-4954-83a6-5771ecd5f627" />
+          <unit-entry name="com:hibernate.xml" value="11be3f9e-f5dd-4a87-8f94-274867ff8e6f" />
+          <unit-entry name="hibernate.xml" value="1d5ff2d0-5615-4ed9-9033-56a27be1508a" />
+        </datasource-map>
+        <naming-strategy-map />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/hibernate.xml" />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/java/com/hiber/dbclasses/hibernate.xml" />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/java/com/hiber/hibernate.xml" />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/java/com/hibernate.xml" />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/java/hibernate.xml" />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.xml" />
+      </configuration>
+    </facet>
+  </component>
+</module>
