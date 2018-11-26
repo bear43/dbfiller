@@ -1,22 +1,25 @@
-package com.hiber.dbclasses;
+package com.hiber.DBClass;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "spenttypeid")
 public class SpentType
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "Title")
     private String title;
 
-    @Column(name = "Description")
     private String description;
+
+    @OneToMany(mappedBy = "spentType")
+    private Set<Check> checks;
+
+    @OneToMany(mappedBy = "spentType")
+    private Set<Collision> collisions;
 
     public SpentType()
     {

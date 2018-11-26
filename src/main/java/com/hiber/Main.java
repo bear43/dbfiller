@@ -1,10 +1,16 @@
 package com.hiber;
 
-import com.hiber.dbclasses.*;
+import com.hiber.DAO.DAO;
+import com.hiber.DAO.DAOImpl;
+import com.hiber.DAO.Finder.DepartmentFinderImpl;
+import com.hiber.DAO.Finder.Finder;
+import com.hiber.DAO.Finder.FinderImpl;
+import com.hiber.DBClass.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Random;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main
 {
@@ -31,34 +37,33 @@ public class Main
 
     public static void main(String[] args) throws Exception
     {
-        DAO dao = new DAOImpl();
-        Department d = new Department();
-        d.setEmployeeCount(1);
-        Employee e = new Employee("kek", "jack");
-        Check c = new Check();
-        Date date;
-        Collision col = new Collision();
-        Random r = new Random();
-        for(SpentType type : types)
-            type.setId(dao.save(type));
-        for(Limit limit : limits)
-            limit.setId(dao.save(limit));
-        for(int i = 0; i < REPEAT_COUNT; i++)
-            for(String title : depTitles)
-            {
-                d.setTitle(title);
-                d.setId(dao.save(d));
-                e.setDepartmentID(d.getId());
-                e.setId(dao.save(e));
-                c.setEmployeeID(e.getId());
-                c.setSpentTypeID(types[r.nextInt(types.length)].getId());
-                c.setTotal(Math.abs(r.nextInt()));
-                c.setDate(new Date((long)Math.abs(r.nextInt())));
-                c.setId(dao.save(c));
-                col.setDepartmentID(d.getId());
-                col.setLimitID(limits[r.nextInt(limits.length)].getId());
-                col.setSpentTypeID(types[r.nextInt(types.length)].getId());
-                col.setId(dao.save(col));
-            }
+        Finder finder;
+        Department[] deps = new Department[]{
+                new Department("Security"),
+                new Department("Managment"),
+                new Department("Service")
+        };
+
+        Employee[] emps = new Employee[]{
+                new Employee("John", "Smith", deps[0]),
+                new Employee("Flex", "Bold", deps[0])
+        };
+        Employee[] emps2 = new Employee[]{
+                new Employee("Care", "Ware", deps[1]),
+                new Employee("Carl", "Johnson", deps[1])
+        };
+        deps[0].getEmployees().addAll(Arrays.asList(emps));
+        deps[1].getEmployees().addAll(Arrays.asList(emps2));
+        //deps[2].getEmployees().addAll(Arrays.asList(emps));
+        List res;
+        try
+        {
+            deps[0].save();
+            deps[1].save();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 }

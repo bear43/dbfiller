@@ -1,26 +1,26 @@
-package com.hiber.dbclasses;
+package com.hiber.DBClass;
 
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
-@Table(name = "T_limit")
+@Table(name = "T_Limit")
 public class Limit
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "Total")
     private long total;
 
-    @Column(name = "StartDate")
     private Date startDate;
 
-    @Column(name = "EndDate")
     private Date endDate;
+
+    @OneToMany(mappedBy = "limits")
+    private Set<Collision> collisions;
 
     public Limit()
     {
