@@ -1,6 +1,7 @@
 package com.hiber.DBClass;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.sql.Date;
 
 @Entity

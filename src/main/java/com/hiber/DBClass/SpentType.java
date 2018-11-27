@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class SpentType
+public class SpentType extends EntityClass
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

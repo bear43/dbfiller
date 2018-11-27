@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class Collision
+public class Collision extends EntityClass
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,7 +17,7 @@ public class Collision
     private SpentType spentType;
 
     @ManyToOne
-    private Limit limits;
+    private Limit limit;
 
     public Collision()
     {
@@ -27,7 +27,7 @@ public class Collision
     public Collision(Department department, Limit limit, SpentType spentType)
     {
         this.department = department;
-        this.limits = limit;
+        this.limit = limit;
         this.spentType = spentType;
     }
 
@@ -44,6 +44,16 @@ public class Collision
     @Override
     public String toString()
     {
-        return String.format("s\n%s\n%s", department.toString(), spentType.toString(), limits.toString());
+        return String.format("s\n%s\n%s", department.toString(), spentType.toString(), limit.toString());
+    }
+
+    public boolean equalsByDepartament(Department department)
+    {
+        return department.equals(this.department);
+    }
+
+    public boolean equalsByLimit(Limit limit)
+    {
+        return limit.equals(this.limit);
     }
 }

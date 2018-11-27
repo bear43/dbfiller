@@ -3,7 +3,9 @@ package com.hiber.DBClass;
 
 import javax.persistence.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,10 +19,10 @@ public class Department extends EntityClass
     private String title;
 
     @OneToMany(mappedBy = "department")
-    private Set<Employee> employees = new HashSet<>();
+    private List<Employee> employees = new ArrayList<>();
 
     @OneToMany(mappedBy = "department")
-    private Set<Collision> collisions = new HashSet<>();
+    private List<Collision> collisions = new ArrayList<>();
 
     public Department()
     {
@@ -52,12 +54,12 @@ public class Department extends EntityClass
         this.title = title;
     }
 
-    public Set<Employee> getEmployees()
+    public List<Employee> getEmployees()
     {
         return employees;
     }
 
-    public void setEmployees(Set<Employee> employees)
+    public void setEmployees(List<Employee> employees)
     {
         this.employees = employees;
     }
@@ -72,7 +74,38 @@ public class Department extends EntityClass
     public void save() throws IOException
     {
         super.save();
-        for(Employee e : employees)
-            e.save();
+        super.saveCollection(employees);
+    }
+
+    public void addLimit(Limit limit, SpentType spentType)
+    {
+        collisions.add(new Collision(this, limit, spentType));
+    }
+
+    public void removeLimit(Limit limit, boolean wholeCollision)
+    {
+        Collision col;
+        for(int i = 0; i < collisions.size(); i++)
+        {
+            col = collisions.get(i);
+            if (col.equalsByDepartament(this) && col.equalsByLimit(limit))
+            {
+                collisions.remove(i);
+                if(!wholeCollision)
+                    return;
+            }
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        return obj instanceof Department && ((Department) obj).id == id;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return id^title.hashCode();
     }
 }

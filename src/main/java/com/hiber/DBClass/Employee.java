@@ -22,11 +22,17 @@ public class Employee extends EntityClass
     @ManyToOne
     private Department department;
 
-    public Employee(String firstname, String secondname, Department department)
+    public Employee(String firstname, String secondname, Department department, Check check)
     {
         this.firstname = firstname;
         this.secondname = secondname;
         this.department = department;
+        this.checkSet.add(check);
+    }
+
+    public Employee(String firstname, String secondname, Department department)
+    {
+        this(firstname, secondname, department, null);
     }
 
     public Employee()
@@ -95,7 +101,6 @@ public class Employee extends EntityClass
     public void save() throws IOException
     {
         super.save();
-        for(Check c : checkSet)
-            c.save();
+        super.saveCollection(checkSet);
     }
 }

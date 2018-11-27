@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "T_Limit")
-public class Limit
+public class Limit extends EntityClass
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,7 +19,7 @@ public class Limit
 
     private Date endDate;
 
-    @OneToMany(mappedBy = "limits")
+    @OneToMany(mappedBy = "limit")
     private Set<Collision> collisions;
 
     public Limit()
@@ -79,5 +79,17 @@ public class Limit
     {
         return String.format("Limit ID: %d\nStartDate: %s\nEndDate: %s\nTotal: %d",
                 id, startDate.toString(), endDate.toString(), total);
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        return obj instanceof Limit && ((Limit) obj).id == id;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return id^startDate.hashCode()^endDate.hashCode()^(int)total;
     }
 }
