@@ -47,13 +47,16 @@ public class Main
                 new Department("Managment"),
                 new Department("Service")
         };
+        for(int i = 0; i < deps.length; i++)
+            for(int j = 0; j < types.length; j++)
+                deps[i].addLimit(limits[j], types[j]);
 
         for(SpentType type : types)
             type.save();
         for(Limit l : limits)
             l.save();
 
-        colisik = new Collision[]
+        /*colisik = new Collision[]
                 {
                         new Collision(deps[0], limits[0], types[0]),
                         new Collision(deps[0], limits[1], types[1]),
@@ -62,6 +65,8 @@ public class Main
                         new Collision(deps[2], limits[0], types[0]),
                         new Collision(deps[2], limits[1], types[1]),
                 };
+        for(Collision coll : colisik)
+            coll.save();*/
 
         Employee[] emps = new Employee[]{
                 new Employee("John", "Smith", deps[0]),
@@ -100,6 +105,9 @@ public class Main
                 new Employee("Carl", "Johnson", deps[1])
         };
         for(Employee e : emps)
+            e.getCheckSet().add(new Check(e, new Date(r.nextInt(Integer.MAX_VALUE)), types[r.nextInt(2)],
+                    r.nextInt(100000)));
+        for(Employee e : emps2)
             e.getCheckSet().add(new Check(e, new Date(r.nextInt(Integer.MAX_VALUE)), types[r.nextInt(2)],
                     r.nextInt(100000)));
         deps[0].getEmployees().addAll(Arrays.asList(emps));

@@ -75,6 +75,7 @@ public class Department extends EntityClass
     {
         super.save();
         super.saveCollection(employees);
+        super.saveCollection(collisions);
     }
 
     public void addLimit(Limit limit, SpentType spentType)
