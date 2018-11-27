@@ -75,7 +75,15 @@ public class Check extends EntityClass
         this.employee = employee;
     }
 
+    public SpentType getSpentType()
+    {
+        return spentType;
+    }
 
+    public void setSpentType(SpentType spentType)
+    {
+        this.spentType = spentType;
+    }
 
     @Override
     public String toString()

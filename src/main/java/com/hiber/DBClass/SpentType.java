@@ -68,4 +68,10 @@ public class SpentType extends EntityClass
         return String.format("SpentType ID: %d\nTitle: %s\nDescription: %s",
                 id, title, description);
     }
+
+    @Override
+    public int hashCode()
+    {
+        return id ^ title.hashCode() ^ description.hashCode();
+    }
 }

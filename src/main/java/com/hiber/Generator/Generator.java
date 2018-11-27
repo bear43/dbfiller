@@ -1,6 +1,7 @@
 package com.hiber.Generator;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Random;
 
 public class Generator
@@ -9,6 +10,12 @@ public class Generator
 
     private final int MIN_STRLEN;
 
+    private final Date START_DATE;
+
+    private final Date END_DATE;
+
+    private Random r = new Random();
+
     public Generator()
     {
         this(20, 4);
@@ -16,13 +23,21 @@ public class Generator
 
     public Generator(int max_strlen, int min_strlen)
     {
+        this(max_strlen, min_strlen,
+                Date.valueOf(LocalDate.of(2010, 1, 1)),
+                Date.valueOf(LocalDate.of(2020, 1, 1)));
+    }
+
+    public Generator(int max_strlen, int min_strlen, Date start_date, Date end_date)
+    {
         this.MAX_STRLEN = max_strlen;
         this.MIN_STRLEN = min_strlen;
+        this.START_DATE = start_date;
+        this.END_DATE = end_date;
     }
 
     public String generateString()
     {
-        Random r = new Random();
         int charSize = r.nextInt(MAX_STRLEN+1);
         charSize = charSize < MIN_STRLEN ? MIN_STRLEN : charSize;
         char[] charArray = new char[charSize];
@@ -33,23 +48,26 @@ public class Generator
 
     public Date generateDate(Date min, Date max)
     {
-        Random r = new Random();
         long minimum = min.getTime();
         long maximum = max.getTime();
         long generated;
-        do generated = Math.abs(r.nextLong());
-        while(generated < minimum && generated > maximum);
+        do generated = minimum + Math.abs(r.nextInt(Integer.MAX_VALUE));
+        while(generated < minimum || generated > maximum);
         return new Date(generated);
+    }
+
+    public int generateInt(int max)
+    {
+        return r.nextInt(max);
     }
 
     public Date generateDate()
     {
-        return generateDate(new Date(0), new Date(Long.MAX_VALUE));
+        return generateDate(START_DATE, END_DATE);
     }
 
     public long generateLong()
     {
-        Random r = new Random();
         return Math.abs(r.nextLong());
     }
 
