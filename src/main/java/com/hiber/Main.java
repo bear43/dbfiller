@@ -23,7 +23,7 @@ public class Main
         {
             Unit u;
             FullUnitGenerator generator = new FullUnitGenerator();
-            generator.generateTypes(30);
+            generator.generateTypes(10);
             new Thread(() ->
             {
                 try
@@ -36,7 +36,7 @@ public class Main
                     ex.printStackTrace();
                 }
             }).run();
-            for(int i = 0; i < 30; i++)
+            for(int i = 0; i < 10; i++)
             {
                 u = generator.generate(30, 1, 30);
                 final List<Limit> limits = Arrays.asList(u.getLimits());

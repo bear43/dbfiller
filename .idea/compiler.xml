@@ -9,8 +9,5 @@
         <module name="dbfiller" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="dbfiller" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

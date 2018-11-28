@@ -16,13 +16,13 @@ public class FullUnitGenerator
     {
         types = new SpentType[count];
         for(int i = 0; i < count; i++)
-            types[i] = SpentTypeGenerator.generateSpentType();
+            types[i] = SpentTypeGenerator.generateSpentTypeEx();
     }
 
     public Unit generate(int employeeCount, int checkCount, int limitCount)
     {
         Generator generator = new Generator();
-        Department department = DepartmentGenerator.generateDepartment();
+        Department department = DepartmentGenerator.generateDepartmentEx();
         Employee[] employees = new Employee[employeeCount];
         Limit[] limits = new Limit[limitCount];
         Map<SpentType, Limit> map = new HashMap<SpentType, Limit>();
@@ -33,7 +33,7 @@ public class FullUnitGenerator
         Check check;
         for(int i = 0; i < employeeCount; i++)
         {
-            employees[i] = EmployeeGenerator.generateEmployee();
+            employees[i] = EmployeeGenerator.generateEmployeeEx();
             for(int j = 0; j < checkCount; j++)
             {
                 spentType = (SpentType)Picker.pickFromCollection(Arrays.asList(types));
